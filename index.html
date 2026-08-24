@@ -6,18 +6,22 @@
 <title>콩이의 뜨개 상자</title>
 <style>
 :root{
-  --ink:#221E2B;
-  --ink2:#5F5972;
-  --ink3:#8B85A0;
-  --line:#D8D2E4;
-  --paper:#ECE8F1;
-  --card:#FCFBFD;
-  --rose:#C25E7A;
-  --rose-soft:#F2DCE3;
-  --sage:#6F8F72;
-  --sage-soft:#DDE7DD;
+  --ink:#3B3448;
+  --ink2:#6A6280;
+  --ink3:#9992AC;
+  --line:#DFD9EA;
+  --paper:#F0EDF6;
+  --card:#FDFCFE;
+  --rose:#B96684;
+  --rose-soft:#F7E3EB;
+  --lilac:#7C6BB0;
+  --lilac-soft:#EBE6F8;
+  --mint:#4F8F76;
+  --mint-soft:#DFF0E8;
+  --sage:#4F8F76;
+  --sage-soft:#DFF0E8;
   --brass:#B98B2A;
-  --shadow:0 1px 2px rgba(34,30,43,.06), 0 8px 24px rgba(34,30,43,.07);
+  --shadow:0 1px 2px rgba(59,52,72,.05), 0 8px 24px rgba(59,52,72,.06);
   --r:14px;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Noto Sans KR",sans-serif;
@@ -43,35 +47,56 @@ input,select,textarea{font-family:inherit;color:inherit}
 /* ---------- 상단 ---------- */
 .top{
   position:sticky;top:0;z-index:20;
-  padding:18px 20px 12px;
-  background:linear-gradient(var(--paper) 72%, rgba(236,232,241,0));
+  padding:16px 20px 10px;
+  background:linear-gradient(var(--paper) 76%, rgba(240,237,246,0));
 }
-.top-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;max-width:1180px;margin:0 auto}
-.brand{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0}
+.top-row{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;max-width:1180px;margin:0 auto}
+.brand{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:0;white-space:nowrap;flex:none}
 .brand em{font-style:normal;color:var(--rose)}
-.count{font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.02em}
 .spacer{flex:1}
-.tools{display:flex;gap:8px;align-items:center}
+.tools{display:flex;gap:8px;align-items:center;margin-left:auto;min-width:0}
+.tab-row{display:flex;align-items:center;gap:12px;max-width:1180px;margin:11px auto 0}
 .search{
-  width:190px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;
-  background:var(--card);font-size:14px;
+  width:200px;padding:10px 16px;border:1.5px solid var(--line);border-radius:999px;
+  background:#fff;font-size:14.5px;min-width:0;
 }
+.search:focus{border-color:var(--rose);outline:none}
 .search::placeholder{color:var(--ink3)}
 .btn{
-  border:1px solid var(--line);background:var(--card);border-radius:999px;
-  padding:9px 14px;font-size:14px;font-weight:600;transition:.15s;
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:10px 15px;font-size:14.5px;font-weight:700;transition:.15s;
 }
-.btn:hover{border-color:var(--ink3)}
-.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-.btn.primary:hover{background:#3A3348}
-.btn.ghost{background:transparent}
-.chips{display:flex;gap:6px;margin:12px auto 0;max-width:1180px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.btn:hover{border-color:var(--rose);color:var(--rose)}
+.btn.primary{background:var(--rose);color:#fff;border-color:var(--rose)}
+.btn.primary:hover{background:#A85875;color:#fff}
+.btn.ghost{background:#fff}
+.tools .btn.ghost{width:42px;padding:10px 0;text-align:center;font-size:15px}
+
+/* 필터 카드 */
+.filters{
+  max-width:1180px;margin:12px auto 0;background:rgba(255,255,255,.62);
+  border:1px solid var(--line);border-radius:16px;padding:8px 14px 10px;
+}
+.frow{display:flex;align-items:center;gap:10px;padding:4px 0}
+.frow + .frow{border-top:1px dashed #E7E2F0}
+.flabel{
+  font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--ink3);
+  flex:none;width:32px;text-align:right;
+}
+.chips{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;padding:2px 0;scrollbar-width:none;margin:0}
 .chips::-webkit-scrollbar{display:none}
 .chip{
-  border:1px solid var(--line);background:transparent;border-radius:999px;
-  padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink2);white-space:nowrap;
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:6px 13px;font-size:13px;font-weight:700;color:var(--ink2);white-space:nowrap;transition:.14s;
 }
-.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip:hover{border-color:var(--ink3)}
+.chip[aria-pressed="true"]{background:var(--rose);color:#fff;border-color:var(--rose)}
+#catChips .chip[aria-pressed="true"]{background:var(--lilac);border-color:var(--lilac)}
+#ndlChips .chip[aria-pressed="true"]{background:var(--mint);border-color:var(--mint)}
+.chip.ndl{font-family:var(--mono);min-width:36px;text-align:center;padding:6px 10px}
+.fstat{
+  font-size:12px;color:var(--ink3);font-weight:700;white-space:nowrap;flex:none;margin-left:auto;
+}
 
 /* ---------- 라이브러리 ---------- */
 main{max-width:1180px;margin:0 auto;padding:8px 20px 120px}
@@ -249,16 +274,10 @@ body.dragging::after{
 }
 
 /* ---------- 탭 ---------- */
-.tabs{display:flex;gap:2px;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;padding:3px}
-.tab{border:0;background:transparent;border-radius:999px;padding:6px 15px;font-size:13.5px;font-weight:700;color:var(--ink2)}
-.tab[aria-pressed="true"]{background:var(--ink);color:#fff}
-
-/* ---------- 필터 줄 ---------- */
-.frow{display:flex;align-items:center;gap:8px;max-width:1180px;margin:7px auto 0}
-.flabel{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--ink3);flex:none;width:34px}
-.frow .chips{margin:0;flex:1}
-.chip.sm{padding:5px 11px;font-size:12.5px}
-.chip.ndl{font-family:var(--mono);min-width:34px;text-align:center;padding:5px 9px}
+.tabs{display:flex;gap:2px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:3px}
+.tab{border:0;background:transparent;border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:700;color:var(--ink2);transition:.14s}
+.tab[aria-pressed="true"]{background:var(--rose);color:#fff}
+.chip.sm{padding:6px 12px;font-size:13px}
 
 /* ---------- 메모(표시해 둔 곳) ---------- */
 .marks-wrap{display:flex;flex-direction:column;gap:9px}
@@ -374,11 +393,143 @@ body.dragging::after{
 }
 @keyframes knit{to{stroke-dashoffset:0}}
 
+/* ---------- 계산 ---------- */
+.cnote{
+  max-width:1180px;margin:0 auto 14px;font-size:12.5px;color:var(--ink2);line-height:1.6;
+  background:rgba(255,255,255,.6);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;
+}
+.cgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.ccard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;
+  box-shadow:var(--shadow);border-top:4px solid var(--rose);
+}
+.ccard[data-tone="lilac"]{border-top-color:var(--lilac)}
+.ccard[data-tone="mint"]{border-top-color:var(--mint)}
+.ccard.span2{grid-column:span 2}
+.ccard h3{margin:0 0 4px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+.chelp{margin:0 0 12px;font-size:12px;color:var(--ink3);line-height:1.55}
+.cgroup{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:9px}
+.cgroup label{
+  display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:700;color:var(--ink3);flex:1;min-width:96px;
+}
+.cgroup input,.cgroup select{
+  border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;font-size:14px;
+  background:#fff;font-family:var(--mono);width:100%;
+}
+.cgroup input:focus,.cgroup select:focus{border-color:var(--rose);outline:none}
+.ctag{
+  font-size:11px;font-weight:800;color:#fff;background:var(--ink3);border-radius:999px;
+  padding:5px 10px;align-self:center;flex:none;
+}
+.ctag.mine{background:var(--rose)}
+.cchk{display:flex;gap:7px;align-items:center;font-size:12.5px;color:var(--ink2);font-weight:600;margin-bottom:10px}
+.cchk input{width:16px;height:16px}
+.cout{
+  background:var(--rose-soft);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.7;
+  color:var(--ink);min-height:44px;
+}
+.ccard[data-tone="lilac"] .cout{background:var(--lilac-soft)}
+.ccard[data-tone="mint"] .cout{background:var(--mint-soft)}
+.cout b{font-family:var(--mono);font-size:17px;font-weight:800}
+.cout .warn2{color:var(--rose);font-weight:700}
+.cout table{border-collapse:collapse;width:100%;margin-top:4px;font-family:var(--mono);font-size:12.5px}
+.cout th,.cout td{padding:4px 6px;text-align:right;border-bottom:1px solid rgba(59,52,72,.09)}
+.cout th{font-size:11px;color:var(--ink3);font-weight:700}
+.cout td:first-child,.cout th:first-child{text-align:left}
+.cmemo{
+  margin-top:10px;width:100%;border:1.5px solid var(--line);background:#fff;border-radius:10px;
+  padding:9px;font-size:12.5px;font-weight:700;color:var(--ink2);
+}
+.cmemo:hover{border-color:var(--rose);color:var(--rose)}
+
+/* ---------- 도안에 연결된 실 ---------- */
+.pyarn{
+  display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;
+  padding:8px 10px;margin-bottom:7px;background:#fff;
+}
+.pyarn .sw{width:26px;height:26px;border-radius:8px;flex:none;background-size:cover;background-position:center}
+.pyarn .info{flex:1;min-width:0}
+.pyarn .nm{font-size:12.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pyarn .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink3)}
+.pyarn .minus{
+  border:1.5px solid var(--line);background:#fff;border-radius:8px;width:30px;height:28px;
+  font-size:12px;font-weight:700;flex:none;color:var(--ink2);
+}
+.pyarn .minus:hover{border-color:var(--rose);color:var(--rose)}
+.pyarn .x{border:0;background:transparent;color:var(--ink3);font-size:13px;padding:0 2px;flex:none}
+.pyarn.legacy{background:var(--paper);border-style:dashed}
+.ymatch{font-size:11.5px;color:var(--ink3);line-height:1.6;margin:9px 0 0}
+.ymatch b{color:var(--mint);font-weight:700}
+.ypick-row{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;margin-bottom:7px;
+}
+.ypick-row.match{border-color:var(--mint);background:var(--mint-soft)}
+.ypick-row .sw{width:30px;height:30px;border-radius:8px;flex:none;background-size:cover;background-position:center}
+.ypick-row .t{flex:1;min-width:0}
+.ypick-row .t b{display:block;font-size:13px;font-weight:700}
+.ypick-row .t span{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.ypick-row .tag{font-size:10.5px;font-weight:800;color:var(--mint);flex:none}
+
+/* ---------- 용어 사전 ---------- */
+.tbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;max-width:1180px}
+.tbar input{
+  flex:1;min-width:180px;padding:11px 16px;border:1.5px solid var(--line);border-radius:999px;
+  background:#fff;font-size:14.5px;
+}
+.tbar input:focus{border-color:var(--rose);outline:none}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(268px,1fr))}
+.term{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;
+  border-left:4px solid var(--rose);
+}
+.term[data-c="대바늘"]{border-left-color:var(--lilac)}
+.term[data-c="한글"]{border-left-color:var(--mint)}
+.term[data-c="공통"]{border-left-color:var(--brass)}
+.term .h{display:flex;align-items:baseline;gap:8px;margin-bottom:3px;flex-wrap:wrap}
+.term .ab{font-family:var(--mono);font-size:14px;font-weight:800;color:var(--ink)}
+.term .ko{font-size:13px;font-weight:700;color:var(--rose)}
+.term[data-c="대바늘"] .ko{color:var(--lilac)}
+.term[data-c="한글"] .ko{color:var(--mint)}
+.term[data-c="공통"] .ko{color:var(--brass)}
+.term .d{font-size:12px;color:var(--ink2);line-height:1.6;margin:0}
+.term .full{font-size:10.5px;color:var(--ink3);font-family:var(--mono)}
+.tnote{
+  max-width:1180px;margin:0 auto 14px;font-size:12.5px;color:var(--ink2);line-height:1.65;
+  background:#FFF6E2;border:1px solid #EFD9A6;border-radius:12px;padding:11px 14px;
+}
+.tnote b{color:#6B5416}
+
+/* ---------- 계산기 접기 ---------- */
+.ccard details{margin:0}
+.ccard > details > summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+  font-size:15px;font-weight:800;letter-spacing:-.01em;
+}
+.ccard > details > summary::-webkit-details-marker{display:none}
+.ccard > details > summary::after{
+  content:"펼치기";margin-left:auto;font-size:11.5px;font-weight:700;color:var(--ink3);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;
+}
+.ccard > details[open] > summary::after{content:"접기"}
+.ccard > details > summary + .chelp{margin-top:10px}
+
 @media (max-width:760px){
   .top{padding:14px 14px 10px}
-  .brand{font-size:19px}
-  .tab{padding:6px 10px;font-size:12.5px}
-  .search{width:110px}
+  .brand{font-size:17px}
+  .tools{flex:1;gap:6px}
+  .search{width:auto;flex:1;min-width:70px;padding:9px 13px;font-size:14px}
+  .tools .btn.ghost{width:38px;padding:9px 0}
+  .tabs{overflow-x:auto;scrollbar-width:none;max-width:100%}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:6px 10px;font-size:12.5px;white-space:nowrap}
+  .tab-row{margin-top:9px}
+  .tgrid{grid-template-columns:1fr}
+  .fstat{display:block;font-size:11px}
+  .cgrid{grid-template-columns:1fr;gap:12px}
+  .ccard.span2{grid-column:span 1}
+  .flabel{width:28px;font-size:11px}
+  .filters{padding:6px 10px 8px}
   .tools .lib-add{display:none}
   .fab{display:block}
   main{padding:8px 14px 110px}
@@ -431,13 +582,6 @@ body.dragging::after{
 <header class="top">
   <div class="top-row">
     <h1 class="brand">콩이의 뜨개 <em>상자</em></h1>
-    <div class="tabs" id="tabs" role="group" aria-label="화면 전환">
-      <button class="tab" data-t="pdf" aria-pressed="true">도안 PDF</button>
-      <button class="tab" data-t="video" aria-pressed="false">도안 영상</button>
-      <button class="tab" data-t="yarn" aria-pressed="false">실 재고</button>
-    </div>
-    <span class="count" id="stat"></span>
-    <span class="spacer"></span>
     <div class="tools">
       <input class="search" id="q" type="search" placeholder="검색" aria-label="검색">
       <button class="btn ghost" id="fullBtn" aria-pressed="false" aria-label="전체화면" title="전체화면 (F)">⛶</button>
@@ -445,13 +589,25 @@ body.dragging::after{
       <button class="btn primary lib-add" id="addBtn">＋ 도안 추가</button>
     </div>
   </div>
-  <div id="filterBox">
-    <div class="chips" id="chips" role="group" aria-label="상태 필터">
-      <button class="chip" data-f="all" aria-pressed="true">전체</button>
-      <button class="chip" data-f="wip" aria-pressed="false">뜨는 중</button>
-      <button class="chip" data-f="plan" aria-pressed="false">계획</button>
-      <button class="chip" data-f="done" aria-pressed="false">완성</button>
-      <button class="chip" data-f="fav" aria-pressed="false">★ 즐겨찾기</button>
+  <div class="tab-row">
+    <div class="tabs" id="tabs" role="group" aria-label="화면 전환">
+      <button class="tab" data-t="pdf" aria-pressed="true">도안 PDF</button>
+      <button class="tab" data-t="video" aria-pressed="false">도안 영상</button>
+      <button class="tab" data-t="yarn" aria-pressed="false">실 재고</button>
+      <button class="tab" data-t="calc" aria-pressed="false">계산</button>
+      <button class="tab" data-t="term" aria-pressed="false">용어</button>
+    </div>
+    <span class="fstat" id="stat"></span>
+  </div>
+  <div class="filters" id="filterBox">
+    <div class="frow"><span class="flabel">상태</span>
+      <div class="chips" id="chips" role="group" aria-label="상태 필터">
+        <button class="chip" data-f="all" aria-pressed="true">전체</button>
+        <button class="chip" data-f="wip" aria-pressed="false">뜨는 중</button>
+        <button class="chip" data-f="plan" aria-pressed="false">계획</button>
+        <button class="chip" data-f="done" aria-pressed="false">완성</button>
+        <button class="chip" data-f="fav" aria-pressed="false">★ 즐겨찾기</button>
+      </div>
     </div>
     <div class="frow"><span class="flabel">분류</span>
       <div class="chips" id="catChips" role="group" aria-label="분류 필터"></div>
@@ -479,6 +635,98 @@ body.dragging::after{
       <p>가지고 있는 실을 적어두면 남은 볼 수와 그램을 한눈에 볼 수 있습니다.</p>
       <button class="btn primary" id="yemptyAdd">＋ 실 추가</button>
     </div>
+  </div>
+  <div id="calcView" hidden>
+    <div class="cnote">게이지만 넣어두면 ①②는 바로 쓸 수 있습니다. ③④⑤는 필요할 때 펼쳐서 쓰세요. 값은 자동으로 저장됩니다.</div>
+    <div class="cgrid">
+
+      <section class="ccard span2" data-tone="rose">
+        <h3>① 게이지 비교</h3>
+        <p class="chelp">10cm 사각형 안의 코수·단수를 넣으세요.</p>
+        <div class="cgroup">
+          <span class="ctag">도안</span>
+          <label>코 <input type="number" id="gPatS" min="0" step="0.5" placeholder="20"></label>
+          <label>단 <input type="number" id="gPatR" min="0" step="0.5" placeholder="28"></label>
+        </div>
+        <div class="cgroup">
+          <span class="ctag mine">내 스와치</span>
+          <label>코 <input type="number" id="gMyS" min="0" step="0.5" placeholder="22"></label>
+          <label>단 <input type="number" id="gMyR" min="0" step="0.5" placeholder="30"></label>
+        </div>
+        <div class="cout" id="gOut">두 게이지를 넣으면 비율이 나옵니다.</div>
+      </section>
+
+      <section class="ccard" data-tone="lilac">
+        <h3>② 도안 환산</h3>
+        <p class="chelp">도안에 적힌 코수·단수를 내 게이지 기준으로 바꿉니다.</p>
+        <div class="cgroup">
+          <label>도안 코수 <input type="number" id="cvS" min="0" placeholder="80"></label>
+          <label>도안 단수 <input type="number" id="cvR" min="0" placeholder="120"></label>
+        </div>
+        <label class="cchk"><input type="checkbox" id="cvEven"> 짝수로 맞추기</label>
+        <div class="cout" id="cvOut">게이지와 도안 수치를 넣어주세요.</div>
+        <button class="cmemo" data-src="cvOut">도안 메모에 붙이기</button>
+      </section>
+
+      <section class="ccard" data-tone="mint">
+        <details><summary>③ 목표 치수 역산</summary>
+        <p class="chelp">원하는 완성 치수에서 필요한 코수·단수를 구합니다. 도안 없이 직접 설계할 때 씁니다.</p>
+        <div class="cgroup">
+          <label>가슴둘레 cm <input type="number" id="szB" min="0" step="0.5" placeholder="96"></label>
+          <label>여유분 cm <input type="number" id="szE" min="0" step="0.5" placeholder="8"></label>
+        </div>
+        <div class="cgroup">
+          <label>기장 cm <input type="number" id="szL" min="0" step="0.5" placeholder="58"></label>
+        </div>
+        <div class="cout" id="szOut">내 게이지와 치수를 넣어주세요.</div>
+        <button class="cmemo" data-src="szOut">도안 메모에 붙이기</button>
+        </details>
+      </section>
+
+      <section class="ccard span2" data-tone="rose">
+        <details><summary>④ 코바늘 원형 증감표</summary>
+        <p class="chelp">원형으로 뜰 때 단마다 몇 코가 되는지 표로 보여줍니다. 도안 없이 즉흥으로 뜰 때 씁니다.</p>
+        <div class="cgroup">
+          <label>시작 코수 <input type="number" id="ciStart" min="1" placeholder="6"></label>
+          <label>매 단 증가 <input type="number" id="ciAdd" min="0" placeholder="6"></label>
+          <label>단수 <input type="number" id="ciRows" min="1" max="60" placeholder="12"></label>
+        </div>
+        <div class="cout" id="ciOut">값을 넣으면 표가 나옵니다.</div>
+        <button class="cmemo" data-src="ciOut">도안 메모에 붙이기</button>
+        </details>
+      </section>
+
+      <section class="ccard span2" data-tone="lilac">
+        <details><summary>⑤ 실 소요량 추정</summary>
+        <p class="chelp">도안 소요량을 내 사이즈·게이지에 맞춰 다시 계산합니다. 무늬에 따라 오차가 크니 어림값으로만 보세요.</p>
+        <div class="cgroup">
+          <label>도안 소요량 g <input type="number" id="ynG" min="0" placeholder="450"></label>
+          <label>도안 기준 둘레 cm <input type="number" id="ynB0" min="0" step="0.5" placeholder="96"></label>
+          <label>도안 기준 기장 cm <input type="number" id="ynL0" min="0" step="0.5" placeholder="58"></label>
+        </div>
+        <div class="cgroup">
+          <label>내 둘레 cm <input type="number" id="ynB1" min="0" step="0.5" placeholder="104"></label>
+          <label>내 기장 cm <input type="number" id="ynL1" min="0" step="0.5" placeholder="62"></label>
+          <label>1볼 g <input type="number" id="ynBall" min="0" placeholder="50"></label>
+        </div>
+        <label class="cchk"><input type="checkbox" id="ynGauge" checked> 게이지 차이도 반영</label>
+        <div class="cgroup">
+          <label style="flex:1">재고와 비교 <select id="ynStock"></select></label>
+        </div>
+        <div class="cout" id="ynOut">값을 넣어주세요.</div>
+        <button class="cmemo" data-src="ynOut">도안 메모에 붙이기</button>
+        </details>
+      </section>
+
+    </div>
+  </div>
+  <div id="termView" hidden>
+    <div class="tnote">영문 도안에서 <b>US 표기와 UK 표기가 다릅니다.</b> 같은 sc·dc라도 뜻이 한 칸씩 밀리니, 도안 첫머리에 US terms인지 UK terms인지 먼저 확인하세요. 아래는 <b>US 기준</b>입니다.</div>
+    <div class="tbar">
+      <input id="tq" type="search" placeholder="용어 검색 (sc, k2tog, 코막음…)" aria-label="용어 검색">
+      <div class="chips" id="tChips" role="group" aria-label="분류"></div>
+    </div>
+    <div class="tgrid" id="tGrid"></div>
   </div>
 </main>
 
@@ -529,7 +777,7 @@ body.dragging::after{
           </div>
         </div>
         <div class="two">
-          <div class="field"><label for="fYarn">실</label><input id="fYarn" list="yarnList" placeholder="브랜드·색"><datalist id="yarnList"></datalist></div>
+          <div class="field"><label for="fYarn">실 메모</label><input id="fYarn" list="yarnList" placeholder="브랜드·색 (자유 입력)"><datalist id="yarnList"></datalist></div>
           <div class="field"><label for="fNeedle">바늘</label>
             <select id="fNeedle"></select>
           </div>
@@ -540,6 +788,12 @@ body.dragging::after{
         </div>
         <div class="field"><label for="fMemo">메모</label><textarea id="fMemo" placeholder="고친 부분, 남은 실, 다음에 할 것…"></textarea></div>
         <button class="btn ghost" id="delBtn" style="width:100%;padding:9px;color:var(--rose);border-color:var(--rose-soft)">이 도안 삭제</button>
+      </div>
+      <div class="sec">
+        <h3>쓰는 실</h3>
+        <div id="projYarns"></div>
+        <button class="btn ghost" id="linkYarn" style="width:100%;padding:8px;font-size:13px">＋ 재고에서 고르기</button>
+        <p class="ymatch" id="ndlMatch" hidden></p>
       </div>
     </aside>
   </div>
@@ -620,7 +874,9 @@ var Store = {
       .catch(function(){ storeMode = window.storage ? "cloud" : "mem"; });
   },
   loadAll: function(){
-    if(storeMode === "idb") return idb("meta","readonly",function(s){ return s.getAll(); }).then(function(r){ return r||[]; });
+    if(storeMode === "idb") return idb("meta","readonly",function(s){ return s.getAll(); }).then(function(r){
+      return (r||[]).filter(function(p){ return p.id !== "__calc"; });
+    });
     if(storeMode === "cloud"){
       return window.storage.get("knit:projects").then(function(r){
         return r ? JSON.parse(r.value) : [];
@@ -795,7 +1051,7 @@ function restoreBackup(d){
 
   return Promise.all(jobs).then(function(){
     syncYarnList();
-    if(state.tab === "yarn") renderYarns(); else renderLib();
+    if(state.tab === "yarn") renderYarns(); else if(state.tab !== "calc") renderLib();
     return r;
   });
 }
@@ -808,6 +1064,465 @@ function restoreMsg(r){
   if(r.yadd) parts.push("실 " + r.yadd + "개 추가");
   if(r.yupd) parts.push("실 " + r.yupd + "개 갱신");
   return parts.join(" · ");
+}
+
+/* ================= 계산 ================= */
+var CALC_FIELDS = ["gPatS","gPatR","gMyS","gMyR","cvS","cvR","szB","szE","szL",
+                   "ciStart","ciAdd","ciRows","ynG","ynB0","ynL0","ynB1","ynL1","ynBall"];
+var CALC_CHECKS = ["cvEven","ynGauge"];
+var calcT;
+
+function num(id){
+  var v = parseFloat($(id).value);
+  return isFinite(v) ? v : 0;
+}
+function saveCalc(){
+  var o = { id:"__calc" };
+  CALC_FIELDS.forEach(function(k){ o[k] = $(k).value; });
+  CALC_CHECKS.forEach(function(k){ o[k] = $(k).checked; });
+  o.stock = $("ynStock").value;
+  clearTimeout(calcT);
+  calcT = setTimeout(function(){ Store.saveMeta(o); }, 400);
+}
+function loadCalc(o){
+  if(!o) return;
+  CALC_FIELDS.forEach(function(k){ if(o[k] != null) $(k).value = o[k]; });
+  CALC_CHECKS.forEach(function(k){ if(o[k] != null) $(k).checked = !!o[k]; });
+  if(o.stock) $("ynStock").dataset.want = o.stock;
+}
+
+function ratios(){
+  var ps = num("gPatS"), pr = num("gPatR"), ms = num("gMyS"), mr = num("gMyR");
+  return {
+    ok: ps > 0 && ms > 0,
+    okRow: pr > 0 && mr > 0,
+    s: ps > 0 && ms > 0 ? ms / ps : 0,      /* 코 배율 */
+    r: pr > 0 && mr > 0 ? mr / pr : 0,      /* 단 배율 */
+    ps:ps, pr:pr, ms:ms, mr:mr
+  };
+}
+
+function runCalc(){
+  var g = ratios();
+
+  /* ① 게이지 */
+  if(!g.ok && !g.okRow){
+    $("gOut").textContent = "두 게이지를 넣으면 비율이 나옵니다.";
+  } else {
+    var t = [];
+    if(g.ok){
+      var pctS = Math.round((g.s - 1) * 100);
+      t.push("코 배율 <b>" + g.s.toFixed(3) + "</b><br>" +
+        (Math.abs(pctS) < 1 ? "코 게이지가 도안과 거의 같습니다."
+          : "내 편물이 도안보다 " + (pctS > 0 ? "촘촘합니다" : "성깁니다") +
+            " — 같은 폭을 내려면 코를 <b>" + Math.abs(pctS) + "%</b> " + (pctS > 0 ? "더" : "덜") + " 잡아야 합니다."));
+    }
+    if(g.okRow){
+      var pctR = Math.round((g.r - 1) * 100);
+      t.push("단 배율 <b>" + g.r.toFixed(3) + "</b><br>" +
+        (Math.abs(pctR) < 1 ? "단 게이지가 도안과 거의 같습니다."
+          : "같은 길이를 내려면 단을 <b>" + Math.abs(pctR) + "%</b> " + (pctR > 0 ? "더" : "덜") + " 떠야 합니다."));
+    }
+    $("gOut").innerHTML = t.join("<hr style='border:0;border-top:1px solid rgba(59,52,72,.12);margin:9px 0'>");
+  }
+
+  /* ② 도안 환산 */
+  var cs = num("cvS"), cr = num("cvR"), lines = [];
+  if((cs && g.ok) || (cr && g.okRow)){
+    if(cs && g.ok){
+      var ns = cs * g.s;
+      if($("cvEven").checked) ns = Math.round(ns / 2) * 2; else ns = Math.round(ns);
+      lines.push("코수 " + cs + "코 → <b>" + ns + "코</b>");
+    }
+    if(cr && g.okRow) lines.push("단수 " + cr + "단 → <b>" + Math.round(cr * g.r) + "단</b>");
+    $("cvOut").innerHTML = lines.join("<br>");
+  } else {
+    $("cvOut").textContent = "게이지와 도안 수치를 넣어주세요.";
+  }
+
+  /* ③ 목표 치수 역산 */
+  var b = num("szB"), ease = num("szE"), len = num("szL");
+  if(g.ms > 0 && b > 0){
+    var total = b + ease;
+    var st = Math.round(total * g.ms / 10 / 2) * 2;
+    var half = st / 2;
+    var out3 = "완성 둘레 <b>" + total + "cm</b> (몸 " + b + " + 여유 " + ease + ")<br>" +
+               "전체 <b>" + st + "코</b> · 앞뒤 각 <b>" + half + "코</b>";
+    if(len > 0 && g.mr > 0) out3 += "<br>기장 " + len + "cm → <b>" + Math.round(len * g.mr / 10) + "단</b>";
+    $("szOut").innerHTML = out3;
+  } else {
+    $("szOut").textContent = "내 게이지(코)와 가슴둘레를 넣어주세요.";
+  }
+
+  /* ④ 원형 증감표 */
+  var s0 = num("ciStart"), add = num("ciAdd"), rows = Math.min(num("ciRows"), 60);
+  if(s0 > 0 && rows > 0){
+    var html = "<table><tr><th>단</th><th>이 단 코수</th><th>늘린 코</th></tr>";
+    var cur = s0, sum = s0;
+    html += "<tr><td>1</td><td>" + s0 + "</td><td>—</td></tr>";
+    for(var i = 2; i <= rows; i++){
+      cur = cur + add;
+      html += "<tr><td>" + i + "</td><td>" + cur + "</td><td>+" + add + "</td></tr>";
+    }
+    html += "</table>";
+    var extra = "";
+    if(g.ms > 0){
+      var circ = cur / g.ms * 10;
+      extra = "<div style='margin-top:8px'>마지막 단 둘레 약 <b>" + circ.toFixed(1) + "cm</b> · 지름 약 <b>" +
+              (circ / Math.PI).toFixed(1) + "cm</b></div>";
+    }
+    $("ciOut").innerHTML = html + extra;
+  } else {
+    $("ciOut").textContent = "값을 넣으면 표가 나옵니다.";
+  }
+
+  /* ⑤ 실 소요량 */
+  var yg = num("ynG"), b0 = num("ynB0"), l0 = num("ynL0"), b1 = num("ynB1"), l1 = num("ynL1"), ball = num("ynBall");
+  if(yg > 0 && b0 > 0 && l0 > 0 && b1 > 0 && l1 > 0){
+    var areaR = (b1 * l1) / (b0 * l0);
+    var dens = 1;
+    if($("ynGauge").checked && g.ok && g.okRow) dens = g.s * g.r;
+    var need = yg * areaR * dens;
+    var txt = "예상 필요량 <b>" + Math.round(need) + "g</b>";
+    txt += "<br><span style='font-size:12px;color:var(--ink2)'>면적 배수 " + areaR.toFixed(2) +
+           (dens !== 1 ? " · 게이지 배수 " + dens.toFixed(2) : "") + "</span>";
+    if(ball > 0) txt += "<br>1볼 " + ball + "g 기준 <b>" + Math.ceil(need / ball) + "볼</b> (여유 포함)";
+    var sel = $("ynStock").value;
+    if(sel){
+      for(var yi = 0; yi < state.yarns.length; yi++){
+        var y = state.yarns[yi];
+        if(y.id !== sel) continue;
+        var have = (y.balls || 0) * (y.gram || 0);
+        txt += "<br>재고 " + y.name + " — 보유 <b>" + have + "g</b> · ";
+        txt += have >= need
+          ? "<span style='color:var(--mint);font-weight:700'>충분합니다 (" + Math.round(have - need) + "g 남음)</span>"
+          : "<span class='warn2'>" + Math.ceil(need - have) + "g 부족" +
+            (y.gram ? " (약 " + Math.ceil((need - have) / y.gram) + "볼)" : "") + "</span>";
+      }
+    }
+    $("ynOut").innerHTML = txt;
+  } else {
+    $("ynOut").textContent = "소요량과 두 치수를 모두 넣어주세요.";
+  }
+}
+
+function syncStockSelect(){
+  var sel = $("ynStock"), want = sel.dataset.want || sel.value;
+  sel.innerHTML = '<option value="">선택 안 함</option>';
+  state.yarns.forEach(function(y){
+    var o = document.createElement("option");
+    o.value = y.id;
+    o.textContent = y.name + (y.balls != null ? " (" + y.balls + "볼)" : "");
+    sel.appendChild(o);
+  });
+  if(want) sel.value = want;
+  delete sel.dataset.want;
+}
+
+/* 계산 결과를 도안 메모에 붙이기 */
+function memoPicker(text){
+  if(!state.projects.length){ toast("먼저 도안을 추가해 주세요"); return; }
+  var opts = state.projects.slice().sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); })
+    .map(function(p){ return '<option value="' + p.id + '">' + esc(p.title) + '</option>'; }).join("");
+  openSheet(
+    '<h3>어느 도안에 붙일까요?</h3>' +
+    '<div class="field"><label for="mpSel">도안</label><select id="mpSel">' + opts + '</select></div>' +
+    '<div class="cout" style="background:var(--rose-soft);white-space:pre-wrap">' + esc(text) + '</div>' +
+    '<div class="sheet-act">' +
+      '<button class="btn ghost" id="mpCancel">취소</button>' +
+      '<button class="btn primary" id="mpOk">붙이기</button>' +
+    '</div>'
+  );
+  $("mpCancel").onclick = closeSheet;
+  $("mpOk").onclick = function(){
+    var p = byId($("mpSel").value);
+    if(!p) return;
+    var stamp = new Date();
+    var head = "[계산 " + (stamp.getMonth()+1) + "/" + stamp.getDate() + "]";
+    p.memo = (p.memo ? p.memo + "\n\n" : "") + head + "\n" + text;
+    touch(p);
+    if(state.cur === p) $("fMemo").value = p.memo;
+    closeSheet();
+    toast(p.title + " 메모에 붙였어요");
+  };
+}
+
+function outText(el){
+  var h = el.innerHTML
+    .replace(/<hr[^>]*>/gi, "\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/(div|tr|table|p)>/gi, "\n")
+    .replace(/<\/(td|th)>/gi, "  ")
+    .replace(/<[^>]+>/g, "");
+  var tmp = document.createElement("textarea");
+  tmp.innerHTML = h;
+  return (tmp.value || "").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function calcInit(){
+  CALC_FIELDS.forEach(function(k){
+    $(k).addEventListener("input", function(){ runCalc(); saveCalc(); });
+  });
+  CALC_CHECKS.forEach(function(k){
+    $(k).addEventListener("change", function(){ runCalc(); saveCalc(); });
+  });
+  $("ynStock").addEventListener("change", function(){ runCalc(); saveCalc(); });
+  Array.prototype.forEach.call(document.querySelectorAll(".cmemo"), function(b){
+    b.onclick = function(){
+      var el = $(b.dataset.src);
+      var txt = outText(el);
+      if(!txt || txt.indexOf("넣어") > -1 || txt.indexOf("나옵니다") > -1){ toast("먼저 값을 넣어주세요"); return; }
+      memoPicker(txt);
+    };
+  });
+}
+
+/* ================= 뜨개 용어 사전 ================= */
+var TERMS = [
+  /* 코바늘 (US 기준) */
+  {a:"ch", f:"chain", k:"사슬뜨기", c:"코바늘", d:"모든 코바늘의 시작. 실을 걸어 고리로 빼내며 사슬처럼 잇습니다."},
+  {a:"sl st", f:"slip stitch", k:"빼뜨기", c:"코바늘", d:"높이 없이 코를 잇는 뜨기. 원형의 첫 코와 끝 코를 잇거나 이동할 때 씁니다."},
+  {a:"sc", f:"single crochet", k:"짧은뜨기", c:"코바늘", d:"가장 기본. 촘촘하고 단단해서 가방·인형에 많이 씁니다. UK에서는 dc라 부릅니다."},
+  {a:"hdc", f:"half double crochet", k:"반한길긴뜨기", c:"코바늘", d:"짧은뜨기와 한길긴뜨기 중간 높이."},
+  {a:"dc", f:"double crochet", k:"한길긴뜨기", c:"코바늘", d:"실을 한 번 감고 뜨는 기본 긴뜨기. UK에서는 tr입니다."},
+  {a:"tr", f:"treble crochet", k:"두길긴뜨기", c:"코바늘", d:"실을 두 번 감아 더 높게 뜹니다."},
+  {a:"sc2tog", f:"single crochet 2 together", k:"짧은뜨기 2코 모아뜨기", c:"코바늘", d:"두 코를 하나로 합쳐 코를 줄입니다."},
+  {a:"inc", f:"increase", k:"코 늘리기", c:"코바늘", d:"같은 자리에 두 코를 떠 넣어 한 코 늘립니다."},
+  {a:"dec", f:"decrease", k:"코 줄이기", c:"코바늘", d:"두 코를 하나로 모아 한 코 줄입니다."},
+  {a:"MR / MC", f:"magic ring / magic circle", k:"매직링", c:"코바늘", d:"원형을 뜰 때 첫 단. 다 뜨고 실을 당기면 가운데 구멍이 닫힙니다."},
+  {a:"BLO / FLO", f:"back / front loop only", k:"뒤(앞)반코 줍기", c:"코바늘", d:"코의 반쪽만 주워 뜹니다. 접히는 선이나 무늬를 만들 때 씁니다."},
+  {a:"ch-sp", f:"chain space", k:"사슬 공간", c:"코바늘", d:"사슬로 만든 빈칸. 그 안에 코를 넣어 뜨라는 뜻입니다."},
+  {a:"puff / bobble", f:"puff, bobble stitch", k:"퍼프·방울뜨기", c:"코바늘", d:"한 자리에 여러 코를 몰아 넣어 도톰하게 튀어나오게 만듭니다."},
+  {a:"shell", f:"shell stitch", k:"조개무늬", c:"코바늘", d:"한 자리에 긴뜨기 여러 개를 부채처럼 펼쳐 넣습니다."},
+  {a:"picot", f:"picot", k:"피코", c:"코바늘", d:"사슬 몇 코로 만드는 작은 돌기. 가장자리 장식에 씁니다."},
+
+  /* 대바늘 */
+  {a:"k", f:"knit", k:"겉뜨기", c:"대바늘", d:"대바늘의 기본. 앞쪽에서 보면 V자 모양이 됩니다."},
+  {a:"p", f:"purl", k:"안뜨기", c:"대바늘", d:"겉뜨기의 뒷면. 앞에서 보면 옆으로 누운 실 모양입니다."},
+  {a:"CO", f:"cast on", k:"코 잡기", c:"대바늘", d:"뜨기를 시작할 첫 코를 바늘에 거는 것."},
+  {a:"BO", f:"bind off / cast off", k:"코 막음", c:"대바늘", d:"다 뜬 뒤 코가 풀리지 않게 마무리하는 것."},
+  {a:"k2tog", f:"knit 2 together", k:"오른코 모아뜨기", c:"대바늘", d:"두 코를 한 번에 겉뜨기해 한 코 줄입니다. 코가 오른쪽으로 눕습니다."},
+  {a:"ssk", f:"slip slip knit", k:"왼코 모아뜨기", c:"대바늘", d:"두 코를 걸러 옮긴 뒤 함께 뜹니다. k2tog와 반대로 왼쪽으로 눕습니다."},
+  {a:"yo", f:"yarn over", k:"바늘 비우기", c:"대바늘", d:"실을 바늘에 걸어 코를 하나 늘립니다. 구멍이 생겨 레이스 무늬가 됩니다."},
+  {a:"M1L / M1R", f:"make one left / right", k:"왼(오른)코 늘리기", c:"대바늘", d:"코 사이 실을 주워 늘립니다. 구멍이 안 생깁니다."},
+  {a:"sl", f:"slip stitch", k:"걸러뜨기", c:"대바늘", d:"뜨지 않고 오른바늘로 그냥 옮깁니다."},
+  {a:"tbl", f:"through back loop", k:"뒤쪽 고리로", c:"대바늘", d:"코의 뒷고리에 바늘을 넣어 뜹니다. 코가 꼬입니다."},
+  {a:"st st", f:"stockinette stitch", k:"메리야스뜨기", c:"대바늘", d:"겉면은 겉뜨기, 안면은 안뜨기. 가장 흔한 매끈한 면."},
+  {a:"garter", f:"garter stitch", k:"가터뜨기", c:"대바늘", d:"모든 단을 겉뜨기. 양면이 같고 가로줄이 생기며 잘 말리지 않습니다."},
+  {a:"rib", f:"ribbing", k:"고무뜨기", c:"대바늘", d:"겉뜨기와 안뜨기를 번갈아. 신축성이 좋아 소매·밑단에 씁니다."},
+  {a:"w&t", f:"wrap and turn", k:"감아 돌리기", c:"대바늘", d:"단을 끝까지 안 뜨고 되돌아오는 기법. 어깨 경사·뒷목에 씁니다."},
+  {a:"PU", f:"pick up stitches", k:"코 줍기", c:"대바늘", d:"이미 뜬 가장자리에서 새 코를 주워 이어 뜹니다."},
+  {a:"DPN", f:"double pointed needles", k:"장갑바늘", c:"대바늘", d:"양쪽이 뾰족한 짧은 바늘 4~5개. 소매·양말처럼 좁은 원통에 씁니다."},
+
+  /* 공통 약어 */
+  {a:"st / sts", f:"stitch(es)", k:"코", c:"공통", d:"바늘에 걸린 하나하나의 고리."},
+  {a:"row / rnd", f:"row / round", k:"단 / 원형 단", c:"공통", d:"row는 왕복해서 뜬 한 줄, rnd는 원형으로 돈 한 바퀴."},
+  {a:"rep", f:"repeat", k:"반복", c:"공통", d:"* 표시부터 반복하라는 뜻. `rep from * 5 times`처럼 씁니다."},
+  {a:"RS / WS", f:"right side / wrong side", k:"겉면 / 안면", c:"공통", d:"완성했을 때 밖으로 보이는 면이 RS입니다."},
+  {a:"beg", f:"beginning", k:"시작", c:"공통", d:"단의 처음. `beg of rnd`는 원형 단의 시작점입니다."},
+  {a:"sk", f:"skip", k:"건너뛰기", c:"공통", d:"그 코를 뜨지 않고 지나갑니다."},
+  {a:"pm / sm", f:"place / slip marker", k:"마커 걸기·옮기기", c:"공통", d:"위치 표시용 고리. 원형 시작점이나 늘림 자리에 겁니다."},
+  {a:"gauge", f:"gauge / tension", k:"게이지", c:"공통", d:"10cm 안에 들어가는 코수와 단수. 이게 안 맞으면 크기가 달라집니다."},
+  {a:"swatch", f:"swatch", k:"스와치", c:"공통", d:"게이지를 재려고 미리 떠보는 작은 견본."},
+  {a:"blocking", f:"blocking", k:"블로킹", c:"공통", d:"다 뜬 뒤 물에 적셔 모양을 잡고 말리는 마무리. 무늬가 살아납니다."},
+  {a:"FO / WIP", f:"finished object / work in progress", k:"완성작 / 뜨는 중", c:"공통", d:"뜨개 커뮤니티에서 흔히 쓰는 표현입니다."},
+  {a:"frog", f:"frogging", k:"풀기", c:"공통", d:"잘못 떠서 되돌리는 것. rip it, rip it 소리가 개구리 같다고 붙은 말입니다."},
+  {a:"lifeline", f:"lifeline", k:"생명줄", c:"공통", d:"코에 여분 실을 통과시켜 두는 것. 풀 때 그 지점까지만 안전하게 돌아갑니다."},
+  {a:"skein / ball", f:"skein / ball", k:"타래 / 볼", c:"공통", d:"실 한 뭉치 단위. 도안의 소요량이 보통 이 단위로 적힙니다."},
+  {a:"weight", f:"yarn weight", k:"실 굵기", c:"공통", d:"lace·fingering·sport·DK·worsted·bulky 순으로 굵어집니다."},
+
+  /* 한글 용어 */
+  {a:"코", f:"", k:"stitch", c:"한글", d:"가로 방향의 단위. 코수가 폭을 결정합니다."},
+  {a:"단", f:"", k:"row / round", c:"한글", d:"세로 방향의 단위. 단수가 길이를 결정합니다."},
+  {a:"기둥코", f:"", k:"turning chain", c:"한글", d:"단을 시작할 때 높이를 맞추려고 먼저 뜨는 사슬."},
+  {a:"되돌아뜨기", f:"", k:"short row", c:"한글", d:"단을 끝까지 뜨지 않고 도중에 돌아오는 기법."},
+  {a:"돗바늘", f:"", k:"tapestry needle", c:"한글", d:"끝이 뭉툭한 굵은 바늘. 실 정리와 잇기에 씁니다."},
+  {a:"실 정리", f:"", k:"weaving in ends", c:"한글", d:"남은 실 끝을 편물 안으로 감춰 넣는 마무리."},
+  {a:"줄바늘", f:"", k:"circular needle", c:"한글", d:"두 바늘이 줄로 이어진 것. 원형이나 넓은 편물에 씁니다."},
+  {a:"매직루프", f:"", k:"magic loop", c:"한글", d:"긴 줄바늘 하나로 좁은 원통을 뜨는 방법. 장갑바늘 대신 씁니다."},
+  {a:"코막음", f:"", k:"bind off", c:"한글", d:"마지막에 코가 풀리지 않게 마무리하는 것."},
+  {a:"돌려뜨기", f:"", k:"twisted stitch", c:"한글", d:"코를 꼬아 떠서 조이고 선명하게 만듭니다."}
+];
+var TCATS = ["전체","코바늘","대바늘","공통","한글"];
+var tFilter = "전체", tQuery = "";
+
+function renderTerms(){
+  var g = $("tGrid");
+  g.innerHTML = "";
+  var q = tQuery.trim().toLowerCase();
+  var list = TERMS.filter(function(t){
+    if(tFilter !== "전체" && t.c !== tFilter) return false;
+    if(!q) return true;
+    return (t.a + " " + t.f + " " + t.k + " " + t.d).toLowerCase().indexOf(q) > -1;
+  });
+  if(!list.length){
+    g.innerHTML = '<p style="grid-column:1/-1;color:var(--ink3);font-size:14px;padding:24px 4px">찾는 용어가 없습니다.</p>';
+    return;
+  }
+  list.forEach(function(t){
+    var el = document.createElement("div");
+    el.className = "term";
+    el.dataset.c = t.c;
+    var h = document.createElement("div");
+    h.className = "h";
+    var ab = document.createElement("span"); ab.className = "ab"; ab.textContent = t.a;
+    var ko = document.createElement("span"); ko.className = "ko"; ko.textContent = t.k;
+    h.appendChild(ab); h.appendChild(ko);
+    if(t.f){
+      var fl = document.createElement("span"); fl.className = "full"; fl.textContent = t.f;
+      h.appendChild(fl);
+    }
+    var d = document.createElement("p"); d.className = "d"; d.textContent = t.d;
+    el.appendChild(h); el.appendChild(d);
+    g.appendChild(el);
+  });
+}
+function termInit(){
+  var cc = $("tChips");
+  TCATS.forEach(function(c){
+    var b = document.createElement("button");
+    b.className = "chip sm"; b.dataset.v = c; b.textContent = c;
+    b.setAttribute("aria-pressed", c === "전체" ? "true" : "false");
+    b.onclick = function(){
+      tFilter = c;
+      Array.prototype.forEach.call(cc.querySelectorAll(".chip"), function(x){
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      renderTerms();
+    };
+    cc.appendChild(b);
+  });
+  $("tq").addEventListener("input", function(){ tQuery = this.value; renderTerms(); });
+  renderTerms();
+}
+
+/* ================= 도안에 실 연결 ================= */
+function yarnById(id){
+  for(var i=0;i<state.yarns.length;i++) if(state.yarns[i].id === id) return state.yarns[i];
+  return null;
+}
+
+function renderProjYarns(){
+  var p = state.cur, wrap = $("projYarns");
+  wrap.innerHTML = "";
+  if(!p) return;
+  if(!p.yarnIds) p.yarnIds = [];
+
+  p.yarnIds.slice().forEach(function(id){
+    var y = yarnById(id);
+    if(!y){
+      p.yarnIds = p.yarnIds.filter(function(o){ return o !== id; });
+      return;
+    }
+    var el = document.createElement("div");
+    el.className = "pyarn";
+    var sw = document.createElement("span");
+    sw.className = "sw";
+    if(y.photo) sw.style.backgroundImage = "url(" + y.photo + ")";
+    else sw.style.background = y.color || "#CFC8DC";
+    var info = document.createElement("div");
+    info.className = "info";
+    var nm = document.createElement("div"); nm.className = "nm"; nm.textContent = y.name;
+    var sub = document.createElement("div"); sub.className = "sub";
+    sub.textContent = (y.balls || 0) + "볼" + (y.gram ? " · " + (y.balls||0)*y.gram + "g" : "") +
+                      (y.needle ? " · " + y.needle + "호" : "");
+    info.appendChild(nm); info.appendChild(sub);
+    var minus = document.createElement("button");
+    minus.className = "minus"; minus.textContent = "−1볼";
+    minus.title = "이 실을 한 볼 썼습니다";
+    minus.onclick = function(){
+      if((y.balls || 0) <= 0){ toast("남은 볼이 없어요"); return; }
+      y.balls = y.balls - 1; y.updatedAt = Date.now();
+      Store.saveYarn(y); renderProjYarns(); syncStockSelect();
+      toast(y.name + " 한 볼 차감 — " + y.balls + "볼 남음");
+    };
+    var x = document.createElement("button");
+    x.className = "x"; x.textContent = "✕"; x.setAttribute("aria-label", "연결 해제");
+    x.onclick = function(){
+      p.yarnIds = p.yarnIds.filter(function(o){ return o !== id; });
+      touch(p); renderProjYarns();
+    };
+    el.appendChild(sw); el.appendChild(info); el.appendChild(minus); el.appendChild(x);
+    wrap.appendChild(el);
+  });
+
+  if(p.yarn){
+    var lg = document.createElement("div");
+    lg.className = "pyarn legacy";
+    var t = document.createElement("div");
+    t.className = "info";
+    t.innerHTML = '<div class="nm">' + esc(p.yarn) + '</div><div class="sub">직접 적은 실</div>';
+    lg.appendChild(t);
+    wrap.appendChild(lg);
+  }
+  if(!p.yarnIds.length && !p.yarn){
+    wrap.innerHTML = '<p style="font-size:12.5px;color:var(--ink3);margin:0 0 9px;line-height:1.6">재고에서 실을 골라 연결해 두면, 뜨면서 볼 수를 바로 차감할 수 있습니다.</p>';
+  }
+  matchNeedle();
+}
+
+/* 바늘 호수에 맞는 실을 재고에서 찾아 알려줍니다 */
+function matchNeedle(){
+  var p = state.cur, el = $("ndlMatch");
+  if(!p || !p.needle){ el.hidden = true; return; }
+  var hit = state.yarns.filter(function(y){
+    return String(y.needle || "") === String(p.needle) &&
+           (!p.yarnIds || p.yarnIds.indexOf(y.id) === -1);
+  });
+  if(!hit.length){ el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = p.needle + "호에 맞는 재고 — " +
+    hit.map(function(y){ return "<b>" + esc(y.name) + "</b>(" + (y.balls||0) + "볼)"; }).join(", ");
+}
+
+function yarnPickSheet(){
+  var p = state.cur; if(!p) return;
+  if(!state.yarns.length){ toast("실 재고를 먼저 등록해 주세요"); return; }
+  if(!p.yarnIds) p.yarnIds = [];
+  var avail = state.yarns.filter(function(y){ return p.yarnIds.indexOf(y.id) === -1; });
+  if(!avail.length){ toast("재고의 실을 모두 연결했어요"); return; }
+
+  /* 바늘 호수가 같은 실을 위로 */
+  avail.sort(function(a, b){
+    var am = String(a.needle||"") === String(p.needle||"") ? 0 : 1;
+    var bm = String(b.needle||"") === String(p.needle||"") ? 0 : 1;
+    return am - bm;
+  });
+
+  openSheet('<h3>어떤 실을 쓰시나요?</h3>' +
+    (p.needle ? '<p style="font-size:12.5px;color:var(--ink3);margin:0 0 12px">이 도안은 ' + p.needle +
+                '호입니다. 같은 호수의 실을 위에 두었습니다.</p>' : '') +
+    '<div id="ypList"></div>' +
+    '<div class="sheet-act"><button class="btn ghost" id="ypCancel">닫기</button></div>');
+
+  var list = $("ypList");
+  avail.forEach(function(y){
+    var match = p.needle && String(y.needle||"") === String(p.needle);
+    var row = document.createElement("button");
+    row.className = "ypick-row" + (match ? " match" : "");
+    var sw = document.createElement("span");
+    sw.className = "sw";
+    if(y.photo) sw.style.backgroundImage = "url(" + y.photo + ")";
+    else sw.style.background = y.color || "#CFC8DC";
+    var t = document.createElement("span");
+    t.className = "t";
+    t.innerHTML = "<b>" + esc(y.name) + "</b><span>" + (y.balls||0) + "볼" +
+                  (y.needle ? " · " + y.needle + "호" : "") +
+                  (y.colorName ? " · " + esc(y.colorName) : "") + "</span>";
+    row.appendChild(sw); row.appendChild(t);
+    if(match){
+      var tag = document.createElement("span");
+      tag.className = "tag"; tag.textContent = "호수 맞음";
+      row.appendChild(tag);
+    }
+    row.onclick = function(){
+      p.yarnIds.push(y.id);
+      touch(p); closeSheet(); renderProjYarns();
+      toast(y.name + " 연결했어요");
+    };
+    list.appendChild(row);
+  });
+  $("ypCancel").onclick = closeSheet;
 }
 
 /* ================= 라이브러리 ================= */
@@ -948,10 +1663,16 @@ function setTab(t){
   Array.prototype.forEach.call($("tabs").querySelectorAll(".tab"), function(b){
     b.setAttribute("aria-pressed", b.dataset.t === t ? "true" : "false");
   });
-  var lib = t !== "yarn";
-  $("libView").hidden = !lib;
-  $("yarnView").hidden = lib;
-  $("filterBox").hidden = !lib;
+  var isLib = (t === "pdf" || t === "video");
+  var isTool = (t === "calc" || t === "term");
+  $("libView").hidden = !isLib;
+  $("yarnView").hidden = t !== "yarn";
+  $("calcView").hidden = t !== "calc";
+  $("termView").hidden = t !== "term";
+  $("filterBox").hidden = !isLib;
+  $("q").hidden = isTool;
+  $("addBtn").hidden = isTool;
+  $("fab").hidden = isTool;
   $("addBtn").textContent = t === "pdf" ? "＋ PDF 추가" : t === "video" ? "＋ 영상 추가" : "＋ 실 추가";
   $("fab").textContent = t === "pdf" ? "＋ PDF" : t === "video" ? "＋ 영상" : "＋ 실";
   $("q").placeholder = t === "yarn" ? "실 검색" : "도안 검색";
@@ -964,7 +1685,9 @@ function setTab(t){
     $("emptyP").textContent = "유튜브 링크를 붙여 넣으면 영상 옆에서 단수를 세고 메모할 수 있습니다.";
     $("emptyAdd").textContent = "＋ 영상 추가";
   }
-  if(lib) renderLib(); else renderYarns();
+  if(isLib) renderLib();
+  else if(t === "yarn") renderYarns();
+  else if(t === "calc"){ syncStockSelect(); runCalc(); }
 }
 
 /* ================= 도안 추가 ================= */
@@ -1111,6 +1834,7 @@ function renderYarns(){
     g.appendChild(c);
   });
   syncYarnList();
+  syncStockSelect();
 }
 
 function syncYarnList(){
@@ -1336,7 +2060,7 @@ function openProject(id){
   $("viewer").classList.add("open");
   $("viewer").setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  fillInfo(p); renderCounters(); renderMarks();
+  fillInfo(p); renderCounters(); renderMarks(); renderProjYarns();
 
   var isVid = p.type === "video";
   $("vwrap").classList.toggle("on", isVid);
@@ -1603,6 +2327,8 @@ FIELDS.forEach(function(f){
     if(!state.cur) return;
     state.cur[f[1]] = $(f[0]).value;
     if(f[1] === "title") $("vTitle").textContent = $(f[0]).value;
+    if(f[1] === "needle") matchNeedle();
+    if(f[1] === "yarn") renderProjYarns();
     touch(state.cur);
   });
 });
@@ -1666,7 +2392,7 @@ $("relink").onchange = function(e){
 
 $("q").addEventListener("input", function(){
   state.q = this.value;
-  if(state.tab === "yarn") renderYarns(); else renderLib();
+  if(state.tab === "yarn") renderYarns(); else if(state.tab !== "calc") renderLib();
 });
 $("chips").addEventListener("click", function(e){
   var b = e.target.closest(".chip"); if(!b) return;
@@ -1723,6 +2449,8 @@ $("vSide").onclick = function(){
   $("vSide").setAttribute("aria-pressed", h ? "false" : "true");
   if(state.scale === null) setTimeout(renderPage, 60);
 };
+$("linkYarn").onclick = yarnPickSheet;
+
 $("addCounter").onclick = function(){
   if(!state.cur) return;
   state.cur.counters.push({ id: uid(), name: "새 카운터", v: 0, rep: 0 });
@@ -1849,6 +2577,16 @@ Store.init().then(function(){
 }).then(function(ys){
   state.yarns = ys;
   syncYarnList();
+  syncStockSelect();
+  calcInit();
+  termInit();
+  if(storeMode === "idb"){
+    return idb("meta","readonly",function(s){ return s.get("__calc"); }).catch(function(){ return null; });
+  }
+  return null;
+}).then(function(c){
+  loadCalc(c);
+  syncStockSelect();
   setTab("pdf");
   if(storeMode === "mem"){
     toast("저장 불가 환경입니다 — 파일을 내려받아 쓰면 계속 저장돼요");
